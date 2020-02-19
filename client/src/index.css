@@ -5,6 +5,14 @@ body {
   background-color: #f2f2f2;
 }
 
+.btn {
+  margin-right: 16px;
+}
+
+.home-button a {
+  margin: 8px;
+}
+
 .movie-card {
   background-color: #fff;
   border: 0;
@@ -68,7 +76,7 @@ body {
 
 .home-button {
   padding: 5px 10px;
-  background-color: lightskyblue;
+  background-color: lightgray;
 }
 
 .movie-warning {
