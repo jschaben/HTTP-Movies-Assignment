@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import MovieCard from "./MovieCard";
+import {Button} from "reactstrap";
+
 export default class Movie extends React.Component {
   constructor(props) {
     super(props);
@@ -8,6 +10,10 @@ export default class Movie extends React.Component {
       movie: null
     };
   }
+
+  item = this.props.items.find(
+    thing => `${thing.id}` === this.props.match.params.id
+  );
 
   componentDidMount() {
     this.fetchMovie(this.props.match.params.id);
@@ -31,6 +37,18 @@ export default class Movie extends React.Component {
     addToSavedList(this.state.movie);
   };
 
+  routeToUpdate = e => {
+    e.persist();
+    e.preventDefault();
+    this.props.history.push(`/update-movie/${this.item.id}`);
+  };
+
+  deleteHandler = e => {
+    e.persist();
+    e.preventDefault();
+    this.props.deleteItem(this.state.movie.id,);
+  };
+
   render() {
     if (!this.state.movie) {
       return <div>Loading movie information...</div>;
@@ -42,6 +60,8 @@ export default class Movie extends React.Component {
         <div className="save-button" onClick={this.saveMovie}>
           Save
         </div>
+        <Button onClick={this.routeToUpdate}>Edit</Button>
+        <Button onClick={this.deleteHandler}>Delete</Button>
       </div>
     );
   }
